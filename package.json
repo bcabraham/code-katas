@@ -1,0 +1,29 @@
+{
+  "name": "code-katas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "npm run lint && npm run mocha",
+    "mocha": "mocha src/{,!(example-dir)/**}/*.test.js --recursive --package ./package.json --exit",
+    "lint": "eslint ./src/",
+    "new-dir": "cp -r ./src/example-dir ./src/new-dir/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "eslint": "^6.8.0"
+  },
+  "mocha": {
+    "extension": [
+      "test.js"
+    ],
+    "watch-files": [
+      "src/**/*.test.js"
+    ]
+  }
+}
