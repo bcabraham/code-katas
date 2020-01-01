@@ -51,7 +51,6 @@ var moveZeros = function(arr) {
     return accumulator;
   }, []);
 
-  console.log("test", JSON.stringify(result));
   return result;
 };
 
