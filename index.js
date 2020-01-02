@@ -1,8 +1,6 @@
-const { solution } = require("./src/09-split-strings");
+const { solution, solution2 } = require("./src/10-roman-numeral-encoder");
 
-console.log(solution("a"));
-console.log(solution("ab"));
-console.log(solution("abc"));
-console.log(solution("abcd"));
-console.log(solution("abcde"));
-console.log(solution("abcdef"));
+console.log(solution2(1666)); // MDCLXVI
+console.log(solution2(1990)); // MCMXC
+console.log(solution2(2008)); // MMVIII
+console.log(solution2(2999)); // MMCMXCIX
