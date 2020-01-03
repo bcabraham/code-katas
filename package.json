@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "test": "npm run lint && npm run mocha",
-    "mocha": "mocha src/{,!(example-dir)/**}/*.test.js --recursive --package ./package.json --exit",
+    "new-dir": "cp -r ./src/example-dir ./src/new-dir/",
     "lint": "eslint ./src/",
-    "new-dir": "cp -r ./src/example-dir ./src/new-dir/"
+    "mocha": "mocha src/{,!(example-dir)/**}/*.test.js --recursive --package ./package.json --exit"
   },
   "keywords": [],
   "author": "",

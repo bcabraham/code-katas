@@ -1,7 +1,3 @@
-const { solution, solution2 } = require("./src/10-roman-numeral-encoder");
+const { sumDigPow } = require("./src/12-sum-digits-powers/index");
 
-console.log(solution(1666)); // MDCLXVI
-console.log(solution2(1666)); // MDCLXVI
-console.log(solution2(1990)); // MCMXC
-console.log(solution2(2008)); // MMVIII
-console.log(solution2(2999)); // MMCMXCIX
+console.log(sumDigPow(10, 10));
