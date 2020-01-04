@@ -1,3 +1,5 @@
-const { sumDigPow } = require("./src/12-sum-digits-powers/index");
+const { validParentheses } = require("./src/13-valid-parentheses");
 
-console.log(sumDigPow(10, 10));
+console.log(validParentheses("(())((()())())"));
+console.log(validParentheses("())"));
+console.log(validParentheses(")(())"));
