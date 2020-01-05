@@ -1,5 +1,3 @@
-const { validParentheses } = require("./src/13-valid-parentheses");
+const { anagrams } = require("./src/14-finding-anagrams");
 
-console.log(validParentheses("(())((()())())"));
-console.log(validParentheses("())"));
-console.log(validParentheses(")(())"));
+console.log(anagrams("laser", ["lazing", "lazy", "lacer"]));

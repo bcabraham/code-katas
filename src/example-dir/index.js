@@ -18,8 +18,8 @@ Notes:
 Top Result:
 */
 
-function toCamelCase(str) {
+function exampleDir(str) {
   return str;
 }
 
-module.exports = { toCamelCase };
+module.exports = { exampleDir };
