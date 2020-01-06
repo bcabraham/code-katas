@@ -1,3 +1,5 @@
-const { anagrams } = require("./src/14-finding-anagrams");
+const { domainName } = require("./src/15-extract-domain");
 
-console.log(anagrams("laser", ["lazing", "lazy", "lacer"]));
+console.log(domainName("http://github.com/carbonfive/raygun"));
+console.log(domainName("http://www.zombie-bites.com"));
+console.log(domainName("https://www.cnet.com"));

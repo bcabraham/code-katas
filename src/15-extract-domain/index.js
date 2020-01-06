@@ -20,9 +20,10 @@ Notes:
 /*
 Top Result:
 */
+const regex = /(?:http[s]{0,1}:\/\/){0,1}(?:www\.){0,1}([\w-]*)(?:\.\w{2,3})*[/\w.-]*/i;
 
 function domainName(url) {
-  return url;
+  return url.match(regex)[1];
 }
 
 module.exports = { domainName };
