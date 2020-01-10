@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "npm run lint && npm run mocha",
-    "new-dir": "cp -r ./src/example-dir ./src/new-dir/",
+    "new-dir": "node util.js new-dir && node util.js update-imports",
     "lint": "eslint ./src/",
     "mocha": "mocha src/{,!(example-dir)/**}/*.test.js --recursive --package ./package.json --exit"
   },
