@@ -1,3 +1,4 @@
+/* eslint-disable */
 const Board = require("./Board");
 
 const sudoku = puzzle => {
@@ -20,7 +21,7 @@ var puzzle = [
   [0, 0, 0, 0, 8, 0, 0, 7, 9]
 ];
 
-sudoku(puzzle);
+// sudoku(puzzle);
 
 /* Should return
 [[5,3,4,6,7,8,9,1,2],
