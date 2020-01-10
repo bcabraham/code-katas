@@ -30,13 +30,19 @@ Top Result:
 */
 
 function generateHashtag(str) {
-  console.log(str.split(/\s/));
+  const regex = /\w+/g;
+  const words = str.match(regex);
 
-  if (str.replace(/\s+/, "").length > 0) {
-    return str;
-  } else {
-    return false;
+  if (words) {
+    const result = words.reduce((result, word) => {
+      return result + word.charAt(0).toUpperCase() + word.slice(1);
+    }, "#");
+    // console.log(words, result);
+    if (result.length <= 140) {
+      return result;
+    }
   }
+  return false;
 }
 
 module.exports = { generateHashtag };
