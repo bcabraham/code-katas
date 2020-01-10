@@ -1,5 +1,5 @@
 const assert = require("chai").assert;
-const { digital_root } = require("./main");
+const { digital_root } = require("./index");
 
 describe("digital_root()", function() {
   it("should add all the digits of a number", function() {
