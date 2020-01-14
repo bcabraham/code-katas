@@ -50,7 +50,7 @@ Top Result:
 
 const BOARD_COLUMNS = 7;
 const BOARD_ROWS = 6;
-const COLORS = {Red: 1, Yellow: 2};
+const COLORS = { Red: 1, Yellow: 2 };
 const COLUMNS = {
   A: 0,
   B: 1,
@@ -64,38 +64,67 @@ const COLUMNS = {
 const board = new Array(BOARD_COLUMNS * BOARD_ROWS).fill(0);
 
 function whoIsWinner(piecesPositionList) {
-  // console.log("piecesPositionList :", piecesPositionList);
+  let result = "Draw";
 
   for (let i = 0; i < piecesPositionList.length; i++) {
-    let result = addToBoard(piecesPositionList[i]);
-    if (result) {
-      return result;
+    let move = piecesPositionList[i];
+    let column = move.split("_")[0];
+    let color = move.split("_")[1];
+
+    let isWinner = false;
+
+    for (
+      let boardIndex = COLUMNS[column];
+      boardIndex < board.length;
+      boardIndex += BOARD_COLUMNS
+    ) {
+      if (!board[boardIndex]) {
+        board[boardIndex] = COLORS[color];
+
+        isWinner = isConnectFour(boardIndex, COLORS[color], 1);
+
+        break;
+      }
+    }
+
+    if (isWinner) {
+      result = color;
+      break;
     }
   }
 
-  // printBoard(board);
-  return "Draw";
+  return result;
 }
 
-function addToBoard(move) {
-  let column = move.split("_")[0];
-  let color = move.split("_")[1];
+function isConnectFour(index, player, depth) {
+  let isWin = false;
 
-  // console.log(move, column, COLUMNS[column], color, COLORS[color]);
+  if (testLeft(index, player, depth) >= 4) {
+    isWin = true;
+  } else if (testRight(index, player, depth) >= 4) {
+    isWin = true;
+  }
 
-  for (let i = COLUMNS[column]; i < board.length; i += BOARD_COLUMNS) {
-    if (!board[i]) {
-      board[i] = COLORS[color];
-      // console.log(`Adding move for ${color} at position: ${printcolumn(i)}`);
+  return isWin;
+}
 
-      let result = isConnectFour(i, COLORS[color], 1);
-      // console.log(`isWin: ${result}`);
+function testLeft(index, player, depth) {
+  let left = index - BOARD_COLUMNS - 1;
 
-      if (result) {
-        return color;
-      }
-      break;
-    }
+  if (depth < 4 && board[left] && board[left] === player) {
+    return testLeft(left, player, depth + 1);
+  } else {
+    return depth;
+  }
+}
+
+function testRight(index, player, depth) {
+  let right = index - BOARD_COLUMNS + 1;
+
+  if (depth < 4 && board[right] && board[right] === player) {
+    return testRight(right, player, depth + 1);
+  } else {
+    return depth;
   }
 }
 
@@ -121,40 +150,4 @@ function addToBoard(move) {
 //   console.table(table);
 // }
 
-function isConnectFour(index, player, depth) {
-  // console.log("ConnectFour: ", {index, player, depth});
-
-  let result = false;
-
-  if (testLeft(index, player, depth) >= 4) {
-    result = true;
-  } else if (testRight(index, player, depth) >= 4) {
-    result = true;
-  }
-
-  return result;
-}
-
-function testLeft(index, player, depth) {
-  // console.log("Left: ", {index, player, depth});
-  let left = index - BOARD_COLUMNS - 1;
-
-  if (depth < 4 && board[left] && board[left] === player) {
-    return testLeft(left, player, depth + 1);
-  } else {
-    return depth;
-  }
-}
-
-function testRight(index, player, depth) {
-  // console.log("Right: ", {index, player, depth});
-  let right = index - BOARD_COLUMNS + 1;
-
-  if (depth < 4 && board[right] && board[right] === player) {
-    return testRight(right, player, depth + 1);
-  } else {
-    return depth;
-  }
-}
-
-module.exports = {whoIsWinner};
+module.exports = { whoIsWinner };

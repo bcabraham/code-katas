@@ -1,5 +1,5 @@
 const assert = require("chai").assert;
-const {whoIsWinner} = require("./index");
+const { whoIsWinner } = require("./index");
 
 describe("whoIsWinner()", function() {
   it("should return the player who has a winning position", function() {
@@ -59,7 +59,14 @@ describe("whoIsWinner()", function() {
   });
   it("should return 'Draw' if now winner can be determined", function() {
     assert.strictEqual(
-      whoIsWinner(["A_Red", "B_Yellow", "A_Red", "E_Yellow", "F_Red", "G_Yellow"]),
+      whoIsWinner([
+        "A_Red",
+        "B_Yellow",
+        "A_Red",
+        "E_Yellow",
+        "F_Red",
+        "G_Yellow"
+      ]),
       "Draw"
     );
   });
