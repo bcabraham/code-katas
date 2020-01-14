@@ -61,9 +61,8 @@ const COLUMNS = {
   G: 6
 };
 
-const board = new Array(BOARD_COLUMNS * BOARD_ROWS).fill(0);
-
 function whoIsWinner(piecesPositionList) {
+  const board = new Array(BOARD_COLUMNS * BOARD_ROWS).fill(0);
   let result = "Draw";
 
   for (let i = 0; i < piecesPositionList.length; i++) {
@@ -73,16 +72,15 @@ function whoIsWinner(piecesPositionList) {
 
     let isWinner = false;
 
-    for (
-      let boardIndex = COLUMNS[column];
-      boardIndex < board.length;
-      boardIndex += BOARD_COLUMNS
-    ) {
+    for (let boardIndex = COLUMNS[column]; boardIndex < board.length; boardIndex += BOARD_COLUMNS) {
       if (!board[boardIndex]) {
+        console.log(color, printcolumn(boardIndex));
         board[boardIndex] = COLORS[color];
 
-        isWinner = isConnectFour(boardIndex, COLORS[color], 1);
-
+        isWinner = isConnectFour(board, boardIndex, COLORS[color], 1);
+        if (isWinner) {
+          console.log(`${color}(${COLORS[color]})`, printcolumn(boardIndex));
+        }
         break;
       }
     }
@@ -93,61 +91,65 @@ function whoIsWinner(piecesPositionList) {
     }
   }
 
+  console.log(board);
+
+  printBoard(board);
   return result;
 }
 
-function isConnectFour(index, player, depth) {
+function isConnectFour(board, index, player, depth) {
   let isWin = false;
 
-  if (testLeft(index, player, depth) >= 4) {
+  if (testLeft(board, index, player, depth) >= 4) {
     isWin = true;
-  } else if (testRight(index, player, depth) >= 4) {
+  } else if (testRight(board, index, player, depth) >= 4) {
     isWin = true;
   }
 
   return isWin;
 }
 
-function testLeft(index, player, depth) {
+function testLeft(board, index, player, depth) {
   let left = index - BOARD_COLUMNS - 1;
 
-  if (depth < 4 && board[left] && board[left] === player) {
-    return testLeft(left, player, depth + 1);
+  if (index % BOARD_COLUMNS > 0 && depth < 4 && board[left] && board[left] === player) {
+    return testLeft(board, left, player, depth + 1);
   } else {
     return depth;
   }
 }
 
-function testRight(index, player, depth) {
+function testRight(board, index, player, depth) {
   let right = index - BOARD_COLUMNS + 1;
 
-  if (depth < 4 && board[right] && board[right] === player) {
-    return testRight(right, player, depth + 1);
+  if (index < BOARD_COLUMNS && depth < 4 && board[right] && board[right] === player) {
+    return testRight(board, right, player, depth + 1);
   } else {
     return depth;
   }
 }
 
-// function printcolumn(index) {
-//   let column = index % BOARD_COLUMNS;
-//   let colName = Object.keys(COLUMNS).find(key => COLUMNS[key] === column);
-//   let row = Math.floor(index / BOARD_COLUMNS);
+function printcolumn(index) {
+  let column = index % BOARD_COLUMNS;
+  let colName = Object.keys(COLUMNS).find(key => COLUMNS[key] === column);
+  let row = Math.floor(index / BOARD_COLUMNS);
 
-//   return colName + row;
-// }
+  return colName + row;
+}
 
-// function printBoard(board) {
-//   const table = board.reduce((prev, curr, i) => {
-//     let col = i % BOARD_COLUMNS;
-//     let row = Math.floor(i / BOARD_COLUMNS);
+function printBoard(board) {
+  const table = board.reduce((prev, curr, i) => {
+    let col = i % BOARD_COLUMNS;
+    let row = Math.floor(i / BOARD_COLUMNS);
+    let colName = Object.keys(COLUMNS).find(key => COLUMNS[key] === col);
 
-//     // console.log({i, curr, col, row});
-//     prev[row] = prev[row] || [];
-//     prev[row][col] = curr;
-//     return prev;
-//   }, []);
+    // console.log({i, curr, col, row});
+    prev[row] = prev[row] || {};
+    prev[row][colName] = curr;
+    return prev;
+  }, []);
 
-//   console.table(table);
-// }
+  console.table(table, ["A", "B", "C", "D", "E", "F", "G"]);
+}
 
 module.exports = { whoIsWinner };

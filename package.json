@@ -8,7 +8,8 @@
     "test": "npm run lint && npm run mocha",
     "new-dir": "node util.js new-dir && node util.js update-imports",
     "lint": "eslint ./src/",
-    "mocha": "mocha src/{,!(example-dir)/**}/*.test.js --recursive --package ./package.json --exit"
+    "mocha": "mocha src/{,!(example-dir)/**}/*.test.js --recursive --package ./package.json --exit",
+    "test-this": "mocha src/18-connect-four/*.test.js"
   },
   "keywords": [],
   "author": "",

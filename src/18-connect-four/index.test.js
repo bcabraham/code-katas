@@ -2,7 +2,7 @@ const assert = require("chai").assert;
 const { whoIsWinner } = require("./index");
 
 describe("whoIsWinner()", function() {
-  it("should return the player who has a winning position", function() {
+  it("should return 'Yellow' if they have the first winning position", function() {
     assert.strictEqual(
       whoIsWinner([
         "C_Yellow",
@@ -36,6 +36,9 @@ describe("whoIsWinner()", function() {
       ]),
       "Yellow"
     );
+  });
+
+  it("should return 'Red' if they have the first winning position", function() {
     assert.strictEqual(
       whoIsWinner([
         "A_Yellow",
@@ -57,17 +60,8 @@ describe("whoIsWinner()", function() {
       "Red"
     );
   });
+
   it("should return 'Draw' if now winner can be determined", function() {
-    assert.strictEqual(
-      whoIsWinner([
-        "A_Red",
-        "B_Yellow",
-        "A_Red",
-        "E_Yellow",
-        "F_Red",
-        "G_Yellow"
-      ]),
-      "Draw"
-    );
+    assert.strictEqual(whoIsWinner(["A_Red", "B_Yellow", "A_Red", "E_Yellow", "F_Red", "G_Yellow"]), "Draw");
   });
 });
