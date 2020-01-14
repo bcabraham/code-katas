@@ -16,26 +16,26 @@ const finding_anagrams = require("./src/14-finding-anagrams");
 const extract_domain = require("./src/15-extract-domain");
 const extract_range = require("./src/16-extract-range");
 const generate_hashtag = require("./src/17-generate-hashtag");
-
-
+const connect_four = require("./src/18-connect-four");
 
 module.exports = {
-sudoku_solver,
-disemvowel,
-digital_root,
-square_every_digit,
-duplicate_encoder,
-find_triangles,
-camelcase_converter,
-move_zeroes,
-tribonacci,
-split_strings,
-roman_numeral_encoder,
-array_diff,
-sum_digits_powers,
-valid_parentheses,
-finding_anagrams,
-extract_domain,
-extract_range,
-generate_hashtag,
+  sudoku_solver,
+  disemvowel,
+  digital_root,
+  square_every_digit,
+  duplicate_encoder,
+  find_triangles,
+  camelcase_converter,
+  move_zeroes,
+  tribonacci,
+  split_strings,
+  roman_numeral_encoder,
+  array_diff,
+  sum_digits_powers,
+  valid_parentheses,
+  finding_anagrams,
+  extract_domain,
+  extract_range,
+  generate_hashtag,
+  connect_four
 };

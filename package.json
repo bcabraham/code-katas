@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node playground.js",
     "test": "npm run lint && npm run mocha",
     "new-dir": "node util.js new-dir && node util.js update-imports",
     "lint": "eslint ./src/",
