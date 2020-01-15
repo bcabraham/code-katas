@@ -102,6 +102,8 @@ function whoIsWinner(piecesPositionList) {
   return result;
 }
 
+// TODO: Needs rework  as it doesn't handle case when moves aren't made in Right to Left or Left to right order.
+// Ex: A -> C -> D -> B falls through this logic.
 function isConnectFour(board, index, player) {
   let depth = 1;
   let isWin = false;
