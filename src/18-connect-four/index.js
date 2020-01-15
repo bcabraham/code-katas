@@ -50,7 +50,6 @@ Top Result:
 
 const BOARD_COLUMNS = 7;
 const BOARD_ROWS = 6;
-const COLORS = { Red: 1, Yellow: 2 };
 const COLUMNS = {
   A: 0,
   B: 1,
@@ -60,9 +59,15 @@ const COLUMNS = {
   F: 5,
   G: 6
 };
+const DIRECTION = {
+  Horizontal: 1,
+  Vertical: BOARD_COLUMNS,
+  Left: BOARD_COLUMNS + 1,
+  Right: BOARD_COLUMNS - 1
+};
 
 function whoIsWinner(piecesPositionList) {
-  const board = new Array(BOARD_COLUMNS * BOARD_ROWS).fill(0);
+  const board = new Array(BOARD_COLUMNS * BOARD_ROWS).fill("");
   let result = "Draw";
 
   for (let i = 0; i < piecesPositionList.length; i++) {
@@ -75,11 +80,11 @@ function whoIsWinner(piecesPositionList) {
     for (let boardIndex = COLUMNS[column]; boardIndex < board.length; boardIndex += BOARD_COLUMNS) {
       if (!board[boardIndex]) {
         console.log(color, printcolumn(boardIndex));
-        board[boardIndex] = COLORS[color];
+        board[boardIndex] = color.charAt(0);
 
-        isWinner = isConnectFour(board, boardIndex, COLORS[color], 1);
+        isWinner = isConnectFour(board, boardIndex, color.charAt(0));
         if (isWinner) {
-          console.log(`${color}(${COLORS[color]})`, printcolumn(boardIndex));
+          console.log(`${color}(${color.charAt(0)})`, printcolumn(boardIndex));
         }
         break;
       }
@@ -91,39 +96,41 @@ function whoIsWinner(piecesPositionList) {
     }
   }
 
-  console.log(board);
+  // console.log(board);
 
   printBoard(board);
   return result;
 }
 
-function isConnectFour(board, index, player, depth) {
+function isConnectFour(board, index, player) {
+  let depth = 1;
   let isWin = false;
 
-  if (testLeft(board, index, player, depth) >= 4) {
+  if (testConnect(board, index, player, depth, DIRECTION.Right) >= 4) {
     isWin = true;
-  } else if (testRight(board, index, player, depth) >= 4) {
+  } else if (testConnect(board, index, player, depth, DIRECTION.Left) >= 4) {
+    isWin = true;
+  } else if (testConnect(board, index, player, depth, DIRECTION.Horizontal) >= 4) {
+    isWin = true;
+  } else if (testConnect(board, index, player, depth, DIRECTION.Vertical) >= 4) {
     isWin = true;
   }
 
   return isWin;
 }
 
-function testLeft(board, index, player, depth) {
-  let left = index - BOARD_COLUMNS - 1;
+function testConnect(board, index, player, depth, step) {
+  let col = index % BOARD_COLUMNS;
+  let nextIndex = index - step;
 
-  if (index % BOARD_COLUMNS > 0 && depth < 4 && board[left] && board[left] === player) {
-    return testLeft(board, left, player, depth + 1);
-  } else {
-    return depth;
-  }
-}
-
-function testRight(board, index, player, depth) {
-  let right = index - BOARD_COLUMNS + 1;
-
-  if (index < BOARD_COLUMNS && depth < 4 && board[right] && board[right] === player) {
-    return testRight(board, right, player, depth + 1);
+  if (
+    col > 0 &&
+    col < BOARD_COLUMNS &&
+    depth < 4 &&
+    board[nextIndex] &&
+    board[nextIndex] === player
+  ) {
+    return testConnect(board, nextIndex, player, depth + 1, step);
   } else {
     return depth;
   }
@@ -138,18 +145,34 @@ function printcolumn(index) {
 }
 
 function printBoard(board) {
-  const table = board.reduce((prev, curr, i) => {
+  let headers = ["", "A", "B", "C", "D", "E", "F", "G"].join("\t");
+  let output = headers + "\n";
+
+  for (let i = 0; i < board.length; i++) {
     let col = i % BOARD_COLUMNS;
     let row = Math.floor(i / BOARD_COLUMNS);
-    let colName = Object.keys(COLUMNS).find(key => COLUMNS[key] === col);
 
-    // console.log({i, curr, col, row});
-    prev[row] = prev[row] || {};
-    prev[row][colName] = curr;
-    return prev;
-  }, []);
+    if (col === 0) {
+      output += row + "\t";
+    }
 
-  console.table(table, ["A", "B", "C", "D", "E", "F", "G"]);
+    output += board[i] + "\t";
+
+    if (col === BOARD_COLUMNS - 1) {
+      output += "\n";
+    }
+  }
+
+  // const table = board.reduce((prev, curr, i) => {
+  //   let colName = Object.keys(COLUMNS).find(key => COLUMNS[key] === col);
+
+  //   // console.log({i, curr, col, row});
+  //   prev[row] = prev[row] || {};
+  //   prev[row][colName] = curr;
+  //   return prev;
+  // }, []);
+
+  console.log(output);
 }
 
-module.exports = { whoIsWinner };
+module.exports = {whoIsWinner};
