@@ -17,25 +17,29 @@ const extract_domain = require("./src/15-extract-domain");
 const extract_range = require("./src/16-extract-range");
 const generate_hashtag = require("./src/17-generate-hashtag");
 const connect_four = require("./src/18-connect-four");
+const take_a_walk = require("./src/19-take-a-walk");
+
+
 
 module.exports = {
-  sudoku_solver,
-  disemvowel,
-  digital_root,
-  square_every_digit,
-  duplicate_encoder,
-  find_triangles,
-  camelcase_converter,
-  move_zeroes,
-  tribonacci,
-  split_strings,
-  roman_numeral_encoder,
-  array_diff,
-  sum_digits_powers,
-  valid_parentheses,
-  finding_anagrams,
-  extract_domain,
-  extract_range,
-  generate_hashtag,
-  connect_four
+sudoku_solver,
+disemvowel,
+digital_root,
+square_every_digit,
+duplicate_encoder,
+find_triangles,
+camelcase_converter,
+move_zeroes,
+tribonacci,
+split_strings,
+roman_numeral_encoder,
+array_diff,
+sum_digits_powers,
+valid_parentheses,
+finding_anagrams,
+extract_domain,
+extract_range,
+generate_hashtag,
+connect_four,
+take_a_walk,
 };
