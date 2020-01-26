@@ -19,7 +19,7 @@ Top Result:
 */
 
 function isValidWalk(walk) {
-  console.log(walk);
+  // console.log(walk);
 
   let result = false;
 
@@ -48,7 +48,7 @@ function isValidWalk(walk) {
       }
     }
 
-    console.log(x, y);
+    // console.log(x, y);
 
     result = x === 0 && y === 0;
   }
@@ -56,4 +56,4 @@ function isValidWalk(walk) {
   return result;
 }
 
-module.exports = { isValidWalk };
+module.exports = {isValidWalk};
